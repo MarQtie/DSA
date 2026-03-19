@@ -5,20 +5,20 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-void initialize(unsigned char *set);
-void insert(unsigned char *set, int element);
-void delete(unsigned char *set, int element);
-bool find(unsigned char set, int element);
+void initializeSet(unsigned char *set);
+void insertElem(unsigned char *set, int element);
+void deleteElem(unsigned char *set, int element);
+bool findElem(unsigned char set, int element);
 unsigned char getUnion(unsigned char A, unsigned char B);
 unsigned char getIntersection(unsigned char A, unsigned char B);
 unsigned char getDifference(unsigned char A, unsigned char B);
-void display(unsigned char set);
+void displaySet(unsigned char set);
 
-void initialize(unsigned char *set){
+void initializeSet(unsigned char *set){
     *set = 0;
 }
 
-void insert(unsigned char *set, int element){
+void insertElem(unsigned char *set, int element){
     if(element < sizeof(char) * 8){
         char unsigned mv = 1 << element;
         *set |= mv;
@@ -27,7 +27,7 @@ void insert(unsigned char *set, int element){
     }
 }
 
-void delete(unsigned char *set, int element){
+void deleteElem(unsigned char *set, int element){
     if(element < sizeof(char) * 8){
         char unsigned mv = 1 << element;
         *set &= ~mv;
@@ -36,7 +36,7 @@ void delete(unsigned char *set, int element){
     }
 }
 
-bool find(unsigned char set, int element){
+bool findElem(unsigned char set, int element){
     unsigned char mv = 1 << element;
     return set & mv != 0;
 }
@@ -56,7 +56,7 @@ unsigned char getDifference(unsigned char A, unsigned char B){
     return diffSet;
 }
 
-void display(unsigned char set) {
+void displaySet(unsigned char set) {
     int first = 1;
 
     for (int i = 0; i < 8; i++) {

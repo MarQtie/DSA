@@ -9,50 +9,73 @@ typedef struct {
     unsigned int field : 8;
 } Set;
 
-void initialize(Set *set);
-void insert(Set *set, int element);
-void delete(Set *set, int element);
-bool find(Set set, int element);
-void Union(Set A, Set B);
-void Intersection(Set A, Set B);
-void Difference(Set A, Set B);
-void display(Set set);
+void initializeSet(Set *set);
+void insertElem(Set *set, int element);
+void deleteElem(Set *set, int element);
+bool findElem(Set set, int element);
+Set getUnion(Set A, Set B);
+Set getIntersection(Set A, Set B);
+Set getDifference(Set A, Set B);
+void displaySet(Set set);
 
-void initialize(Set *set){
+void initializeSet(Set *set){
     set->field = 0;
 }
 
-void insert(Set *set, int element){
-    if(element < sizeof(unsigned int) * 8) {
-        unsigned char mv = 1 << element;
-        mv |= set->field;
+void insertElem(Set *set, int element){
+    if(element >= 0 && element < 8) {
+        unsigned int mv = 1 << element;
+        set->field |= mv;
     }else {
         printf("Element Out of Bounds!\n");
     }
 }
 
-void delete(Set *set, int element){
-
+void deleteElem(Set *set, int element){
+    if(element >= 0 && element < 8) {
+        unsigned int mv = 1 << element;
+        set->field &= ~mv;
+    }else {
+        printf("Element Out of Bounds!\n");
+    }
 }
 
-bool find(Set set, int element){
-
+bool findElem(Set set, int element){
+    unsigned int mv = 1 << element;
+    return (set.field & mv) ? true : false;
 }
 
-void Union(Set A, Set B){
-
+Set getUnion(Set A, Set B){
+    Set C;
+    C.field = A.field | B.field;
+    return C;
 }
 
-void Intersection(Set A, Set B){
-
+Set getIntersection(Set A, Set B){
+    Set C;
+    C.field = A.field & B.field;
+    return C;
 }
 
-void Difference(Set A, Set B){
-
+Set getDifference(Set A, Set B){
+    Set C;
+    C.field = A.field & ~B.field;
+    return C;
 }
 
-void display(Set set){
+void displaySet(Set set){
+    int first = 1;
 
+    for (int i = 0; i < 8; i++){
+        if(set.field & (1 << i)){
+            if(!first){
+                printf(", ");
+            }
+            printf("%d", i);
+            first = 0;
+        }
+    }
+    printf("\n");
 }
 
 #endif
