@@ -5,8 +5,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+#define SIZE 8
+
 typedef struct {
-    unsigned int field : 8;
+    unsigned int field : SIZE;
 } Set;
 
 void initializeSet(Set *set);
@@ -23,7 +25,7 @@ void initializeSet(Set *set){
 }
 
 void insertElem(Set *set, int element){
-    if(element >= 0 && element < 8) {
+    if(element < SIZE) {
         unsigned int mv = 1 << element;
         set->field |= mv;
     }else {
