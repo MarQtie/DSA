@@ -47,7 +47,6 @@ char pop(SA *s) {
 }
 
 char peek(SA *s) {
-
     if (s->top == -1) {
         return '\0';
     }
@@ -55,21 +54,49 @@ char peek(SA *s) {
     return s->arr[s->top];
 }
 
+int isEmpty(SA *s){
+    return s->top == -1;
+}
+
 int compareStacks(SA *s1, SA *s2) {
 
-    // First check length
     if (s1->top != s2->top) {
         return 0;
     }
 
-    // Compare elements from bottom to top
     for (int i = 0; i <= s1->top; i++) {
         if (s1->arr[i] != s2->arr[i]) {
             return 0;
         }
     }
 
-    return 1;   // All elements match
+    return 1;  
+}
+
+SA removeDupes(char input[]){
+    SA s;
+    initStack(&s);
+
+    for (int i = 0; input[i]; i++){
+        if(!isEmpty(&s) && peek(&s) == input[i]){
+            pop(&s);
+        }else {
+            push(&s, input[i]);
+        }
+    }
+    return s;
+}
+
+void display(SA s){
+    if(s.top == -1){
+        return;
+    }
+
+    printf("Output: ");
+    for(int i = 0; i <= s.top; i++){
+        printf("%c", s.arr[i]);
+    }
+    printf("\n");
 }
 
 #endif
