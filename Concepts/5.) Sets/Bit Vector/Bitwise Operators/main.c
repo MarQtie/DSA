@@ -10,7 +10,7 @@ void displayBinary(unsigned char num) {
 
 int main() {
     
-unsigned char a = 15;  // 00000101
+unsigned char a = 5;  // 00000101
     unsigned char b = 3;  // 00000011
 
     printf("a = %u (", a);
