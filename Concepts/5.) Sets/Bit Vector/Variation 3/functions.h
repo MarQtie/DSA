@@ -56,7 +56,7 @@ void getIntersection(Set A, Set B, Set C){
 
 void getDifference(Set A, Set B, Set C){
     for(int i = 0; i < ARRAY_SIZE; i++){
-        C[i] = A[i] && !B[i];
+        C[i] = A[i] & !B[i];
     }
 }
 
